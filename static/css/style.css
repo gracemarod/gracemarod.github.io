@@ -1,41 +1,44 @@
 /*Navbar style*/
-ul {
+
+.navigation{
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+.nav ul{
 	list-style-type: none;
+	background-color: #004b98
     margin: 0;
-    padding: 20px 20px;
     overflow: hidden;
 }
 
 
-li a{
+.nav ul li {
 	float: left;
 	display: block;
 	margin: 0;
-	padding: 14px 14px;
+	/*padding: 14px 14px;*/ 
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 20px;
-	color:#000000; 
-	
+	font-size: 30px;
 }
 
-li a:hover{
+
+.nav ul li:hover{
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px; 
 	border-bottom-left-radius: 6px;
 	background-color: #e0e0e0;
+
 }
 
 .active{
+	color:#e0e0e0;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px; 
 	border-bottom-left-radius: 6px;
 	border-left: 8px solid #e0e0e0;
 	border-bottom: 8px solid #e0e0e0;
-/*	border-right: 1px solid #e0e0e0;
-	border-top: 1px solid #e0e0e0;*/
-
-	/*background-color: #e0e0e0;*/
 }

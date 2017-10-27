@@ -9,7 +9,7 @@
   <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" href="../static/css/style.css">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -18,17 +18,51 @@
 
 <body>
   <!-- <script src="js/scripts.js"></script> -->
-  <div>
+  <!-- <div>
       <ul class="nav">
         <li><a class="active">Home</a></li>
         <li><a>Eduaction</a></li>
         <li><a>Skills</a></li>
         <li><a>Projects</a></li>
-        <!-- <li><a>Blog</a></li>         -->
+        <li><a>Blog</a></li>        
       </ul>
   </div>
-  
+   -->
+<script >
+     $(document).ready(function () {
+        $('.nav a').click(function () {
+            //removing the previous selected menu state
+            $('.nav').find('li.active').removeClass('active');
+            //adding the state for this parent menu
+            $(this).parents("li").addClass('active');
+
+        });
+    });
+</script>
+
+<div class="navigation">
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link" href="#home" style="color:black">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#education" style="color:black">Education</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#skills" style="color:black">Skills</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#experience" style="color:black">Experience</a>
+  </li>
+</ul>
+<div>
+
+<div class="body">
+
+</div>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 </html>
