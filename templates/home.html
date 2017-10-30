@@ -84,12 +84,18 @@
       delete keyStatus[event.keyCode]
     }
 
+    function drawShip(ctx){
+      // ship = document.getElementById('ship');
+      ctx.drawImage(ship,0,0, 160,100);
+    }
+
     function drawAll(){
       //Reset before clearing the canvas
       ctx.setTransform(1,0,0,1,0,0);
       ctx.clearRect(0,0,canvas.width,canvas.height);
       // space = document.getElementById('background');
       space = document.getElementById('background');
+      ship = document.getElementById('ship');
       //Draw the background image of space
       // ctx.drawImage(space,0,0,888,483);
 
@@ -98,14 +104,14 @@
       ctx.fillStyle = pattern;
       ctx.fill();
 
+      drawShip(ctx);
+
     }
 
     function start(){
       canvas = document.getElementById('canvas');
 
       ctx = canvas.getContext('2d');
-      // space = document.getElementById('background');
-
 
       initKeys(canvas);
 
@@ -157,6 +163,7 @@
 <div class="bodyContent" onload="start();">
   <div style="display:none;">
     <img id="background" src="../static/img/space_background.png" > 
+    <img id="ship"  src="../static/img/spaceship.svg"> 
   </div>
   <tb>
     <!-- Gotta edit canvas dimensions -->
