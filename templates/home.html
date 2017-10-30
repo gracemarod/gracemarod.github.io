@@ -84,13 +84,32 @@
       delete keyStatus[event.keyCode]
     }
 
+    function drawAll(){
+      //Reset before clearing the canvas
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // space = document.getElementById('background');
+      space = document.getElementById('background');
+      //Draw the background image of space
+      // ctx.drawImage(space,0,0,888,483);
+
+      var pattern = ctx.createPattern(space,'repeat-x');
+      ctx.rect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = pattern;
+      ctx.fill();
+
+    }
+
     function start(){
       canvas = document.getElementById('canvas');
 
       ctx = canvas.getContext('2d');
-      // space = document.getElemtnById('background');
+      // space = document.getElementById('background');
 
-      initKeys(canvas)
+
+      initKeys(canvas);
+
+      drawAll();
     }
   </script>
 
@@ -136,8 +155,12 @@
 <div>
 
 <div class="bodyContent" onload="start();">
+  <div style="display:none;">
+    <img id="background" src="../static/img/space_background.png" > 
+  </div>
   <tb>
-    <canvas id="canvas" height="110" class="space-canvas"></canvas>
+    <!-- Gotta edit canvas dimensions -->
+    <canvas id="canvas" width="1240" height="480" class:"bodyCanvas" ></canvas>
   </tb>
 <!-- 
   <svg width="100%" height="550"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
