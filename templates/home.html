@@ -35,6 +35,18 @@
              };
     })();
 
+    function initParams(){
+      params = {
+        'x0': 0,
+        'y0': 0,
+        'fixedDisplacement': 20, // 20 pix/s
+        'angleStep': 15, // 15 deg for each keyPress
+        // For Mode 1
+        'fixedVelocity': 50, // 20 pix/s
+        'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
+      }
+    }
+
     function initKeys(canvas){
         // Make sure the canvas can receive the key events
         canvas.setAttribute('tabindex','0');
@@ -44,19 +56,19 @@
         canvas.addEventListener( "keydown", onKeyDown, true);
         canvas.addEventListener( "keyup", onKeyUp, true);
     }
-    function getKey(event){
-      switch(event.keyCode){
-        //left arrow
-        case 37:
-        moveLeft = moveLeft - 10;
-        spaceship.setAttribute("x",moveLeft);
+    // function getKey(event){
+    //   switch(event.keyCode){
+    //     //left arrow
+    //     case 37:
+    //     moveLeft = moveLeft - 10;
+    //     spaceship.setAttribute("x",moveLeft);
 
-        //right arrow
-        case 39:
-        moveRight = moveRight + 10;
-        spaceship.setAttribute("x", moveRight);
-      }
-    }
+    //     //right arrow
+    //     case 39:
+    //     moveRight = moveRight + 10;
+    //     spaceship.setAttribute("x", moveRight);
+    //   }
+    // }
 
     function isKeyDown(keyCode){
         return keyStatus[keyCode]
@@ -64,29 +76,80 @@
 
     //Callbacks for discrete key events
     function onKeyDown(event){
-      var elapsed = 0;
-      var timeNow = new Date().getTime()/1000; //all expressed in seconds
 
-      if (lastTime != 0){
-        elapsed = timeNow - lastTime;
-      } else{
-        startTime = timeNow;
-      }
-      lastTime = timeNow;
-      totalElapsed = timeNow - startTime;
-     
+      // var elapsed = 0;
+      // var timeNow = new Date().getTime() / 1000; //  ilAll expressed in seconds
+      //   if (lastTime != 0) {
+      //       elapsed = timeNow - lastTime;
+      //   } else {
+      //       startTime = timeNow;
+      //   }
+      // lastTime = timeNow;
+      //  totalElapsed = timeNow - startTime;
+      
       console.log(event);
+      
+      event.preventDefault();
       keyStatus[event.keyCode] = true;
       
     }
 
     function onKeyUp(event){
+      // Put your code here
+      //When the keys stop being pressed, delete the elements in keyStatus
       delete keyStatus[event.keyCode]
+    }
+
+    /*Timing and main loop */
+    var startTime = 0;
+    var lastTime = 0;
+    var elapsed = 0, totalElapsed = 0;
+
+    function updateTime() {
+      var timeNow = new Date().getTime() / 1000; // All expressed in seconds
+      if (lastTime != 0) {
+        elapsed = timeNow - lastTime;
+      } else {
+        startTime = timeNow;
+      }
+      lastTime = timeNow;
+      totalElapsed = timeNow - startTime;
+    }
+
+    // Timer callback for animations
+    function onTick() {
+        // 
+          updateTime()
+          animate();
+          drawAll();
+        
+        requestAnimFrame(onTick);
+    }
+
+    function animate(){
+        params.vx = 0;
+        params.vy = 0;
+
+        //React to arrow right
+        if(isKeyDown(39)){
+          console.log("x0: ",params.x0,"y0: ",params.y0)
+          params.x0 += (params.fixedVelocity*elapsed) 
+        }
+        //React to arrow left
+        else if(isKeyDown(37)){
+          console.log("x0: ",params.x0,"y0: ",params.y0)
+          params.x0 -= (params.fixedVelocity*elapsed) 
+        }
+
     }
 
     function drawShip(ctx){
       // ship = document.getElementById('ship');
-      ctx.drawImage(ship,0,0, 160,100);
+
+      ctx.translate(params.x0,params.y0);
+
+      ctx.drawImage(ship,0,0, 170,100);
+
     }
 
     function drawAll(){
@@ -112,10 +175,12 @@
       canvas = document.getElementById('canvas');
 
       ctx = canvas.getContext('2d');
-
+      initParams();
       initKeys(canvas);
 
       drawAll();
+
+      onTick();
     }
   </script>
 
