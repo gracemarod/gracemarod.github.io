@@ -42,7 +42,7 @@
         'fixedDisplacement': 20, // 20 pix/s
         'angleStep': 15, // 15 deg for each keyPress
         // For Mode 1
-        'fixedVelocity': 50, // 20 pix/s
+        'fixedVelocity': 150, // 20 pix/s
         'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
       }
     }
@@ -136,7 +136,7 @@
           params.x0 += (params.fixedVelocity*elapsed) 
         }
         //React to arrow left
-        else if(isKeyDown(37)){
+        else if(isKeyDown(37) && params.x0 >= 0){
           console.log("x0: ",params.x0,"y0: ",params.y0)
           params.x0 -= (params.fixedVelocity*elapsed) 
         }
@@ -148,7 +148,7 @@
 
       ctx.translate(params.x0,params.y0);
 
-      ctx.drawImage(ship,0,0, 170,100);
+      ctx.drawImage(ship,0,350, 170,100);
 
     }
 
@@ -208,10 +208,10 @@
     });
 </script>
 
-<div class="navigation">
+<!-- <div class="navigation">
 <ul class="nav">
   <li class="nav-item">
-    <a class="nav-link" href="#home" style="color:black">Home</a>
+    <a class="nav-link active" href="#home" style="color:black">Home</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#education" style="color:black">Education</a>
@@ -221,6 +221,23 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#experience" style="color:black">Experience</a>
+  </li>
+</ul>
+<div> -->
+
+<div class="navigation">
+<ul class="nav">
+  <li id="home" class="active">
+    <a href="#home" style="color:black">Home</a>
+  </li>
+  <li>
+    <a href="#education" style="color:black">Education</a>
+  </li>
+  <li>
+    <a href="#skills" style="color:black">Skills</a>
+  </li>
+  <li>
+    <a href="#experience" style="color:black">Experience</a>
   </li>
 </ul>
 <div>
@@ -234,6 +251,8 @@
     <!-- Gotta edit canvas dimensions -->
     <canvas id="canvas" width="1240" height="480" class:"bodyCanvas" ></canvas>
   </tb>
+
+
 <!-- 
   <svg width="100%" height="550"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
 

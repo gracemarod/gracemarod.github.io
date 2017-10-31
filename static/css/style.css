@@ -9,29 +9,26 @@
 	list-style-type: none;
 	background-color: #004b98
     margin: 0;
+    padding:0;
     overflow: hidden;
 }
 
-
-.nav ul li {
-	float: left;
-	display: block;
-	margin: 0;
-	/*padding: 14px 14px;*/ 
-	text-align: center;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 30px;
+.nav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
-
-.nav ul li:hover{
-	border-top-left-radius: 6px;
+.nav li a:hover{
+/*    border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px; 
-	border-bottom-left-radius: 6px;
-	background-color: #e0e0e0;
-
+	border-bottom-left-radius: 6px;*/
+	background-color: #ededed;
 }
+
 
 .active{
 	color:#e0e0e0;
