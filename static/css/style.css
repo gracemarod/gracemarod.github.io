@@ -71,10 +71,10 @@ display: inline-block;
 }
 
 .inTextBox{
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px; 
-	border-bottom-left-radius: 3px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px; 
+	border-bottom-left-radius: 6px;
 	position: absolute;
     float: right;
     background-color:#efefef; 
