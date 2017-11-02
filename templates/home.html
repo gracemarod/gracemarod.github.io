@@ -20,14 +20,6 @@
   //variable App either returns the attributes if it's ready or an empty object
   var App = window.App || {};
 
-  // App.myCanvas = {
-  //  moveLeft: 0,
-  //  moveRight: 0,
-  //  keyStatus: {},
-  //  canvas,
-  //  ctx
-  // };
-
   //For a cleaner code, all of the functions and variables for the canvas can be added
   //to one object
   App.myCanvas =  function(){
@@ -35,19 +27,146 @@
         moveRight = 0,
         keyStatus = {},
         canvas,
-        ctx,
+        ctx;
+
+      /*Timing and main loop */
+      var startTime = 0;
+      var lastTime = 0;
+      var elapsed = 0, totalElapsed = 0;
+
+      window.requestAnimFrame = (function() {
+      return window.requestAnimationFrame ||
+             window.webkitRequestAnimationFrame ||
+             window.mozRequestAnimationFrame ||
+             window.oRequestAnimationFrame ||
+             window.msRequestAnimationFrame ||
+             function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+               window.setTimeout(callback, 1000/60);
+             };
+    })();
     init = function(){
-      // this.initParams();
+      this.initParams();
       start();
     },
+    
     start = function() {
       // stuff from below
       console.log("starting...");
+
+      canvas = document.getElementById('canvas');
+
+      ctx = canvas.getContext('2d');
+      initParams();
+      initKeys(canvas);
+
+      drawAll();
+
+      onTick();
     },
+
     initParams = function(){
+      params = {
+        'x0': 0,
+        'y0': 0,
+        'fixedDisplacement': 20, // 20 pix/s
+        'angleStep': 15, // 15 deg for each keyPress
+        // For Mode 1
+        'fixedVelocity': 200, // 20 pix/s
+        'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
+      }
+    }
+    initKeys = function(canvas){
+        // Make sure the canvas can receive the key events
+        canvas.setAttribute('tabindex','0');
+        canvas.focus();
 
-    };
+        // Register the keyDown and keyUp events
+        canvas.addEventListener( "keydown", onKeyDown, true);
+        canvas.addEventListener( "keyup", onKeyUp, true);
+    },
+    isKeyDown = function(keyCode){
+        return keyStatus[keyCode]
+    },
+    //Callbacks for discrete key events
+    onKeyDown= function(event){
+    
+      console.log(event);
+      
+      event.preventDefault();
+      keyStatus[event.keyCode] = true;
+    }, 
+    onKeyUp = function(event){
+      // Put your code here
+      //When the keys stop being pressed, delete the elements in keyStatus
+      delete keyStatus[event.keyCode]
+    },
 
+    updateTime = function(){
+      var timeNow = new Date().getTime() / 1000; // All expressed in seconds
+      if (lastTime != 0) {
+        elapsed = timeNow - lastTime;
+      } else {
+        startTime = timeNow;
+      }
+      lastTime = timeNow;
+      totalElapsed = timeNow - startTime;
+    },
+
+    // Timer callback for animations
+    onTick = function(){
+        // 
+          updateTime()
+          animate();
+          drawAll();
+        
+        requestAnimFrame(onTick);
+    },
+    animate = function(){
+        params.vx = 0;
+        params.vy = 0;
+
+        //React to arrow right
+        if(isKeyDown(39)){
+          console.log("x0: ",params.x0,"y0: ",params.y0)
+          params.x0 += (params.fixedVelocity*elapsed) 
+        }
+        //React to arrow left
+        else if(isKeyDown(37) && params.x0 >= 0){
+          console.log("x0: ",params.x0,"y0: ",params.y0)
+          params.x0 -= (params.fixedVelocity*elapsed) 
+        }
+
+    }
+
+    drawShip = function(ctx){
+      // ship = document.getElementById('ship');
+
+      ctx.translate(params.x0,params.y0);
+
+      ctx.drawImage(ship,0,350, 170,100);
+
+    }
+
+    drawAll = function(){
+      //Reset before clearing the canvas
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // space = document.getElementById('background');
+      space = document.getElementById('background');
+      ship = document.getElementById('ship');
+      //Draw the background image of space
+      // ctx.drawImage(space,0,0,888,483);
+
+      var pattern = ctx.createPattern(space,'repeat-x');
+      ctx.rect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = pattern;
+      ctx.fill();
+
+      drawShip(ctx);
+
+    }
+
+    //Init the canvas
     init();
   };
 
@@ -72,196 +191,10 @@
     });
   });
 
-  // App.myCanvas.canvas;
-    //Global variables
-    moveLeft = 0;
-    moveRight = 0;
-    var keyStatus = {};
-    var canvas;
-    var ctx;
-
-     window.requestAnimFrame = (function() {
-      return window.requestAnimationFrame ||
-             window.webkitRequestAnimationFrame ||
-             window.mozRequestAnimationFrame ||
-             window.oRequestAnimationFrame ||
-             window.msRequestAnimationFrame ||
-             function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
-               window.setTimeout(callback, 1000/60);
-             };
-    })();
-
-    function initParams(){
-      params = {
-        'x0': 0,
-        'y0': 0,
-        'fixedDisplacement': 20, // 20 pix/s
-        'angleStep': 15, // 15 deg for each keyPress
-        // For Mode 1
-        'fixedVelocity': 200, // 20 pix/s
-        'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
-      }
-    }
-
-    function initKeys(canvas){
-        // Make sure the canvas can receive the key events
-        canvas.setAttribute('tabindex','0');
-        canvas.focus();
-
-        // Register the keyDown and keyUp events
-        canvas.addEventListener( "keydown", onKeyDown, true);
-        canvas.addEventListener( "keyup", onKeyUp, true);
-    }
-    // function getKey(event){
-    //   switch(event.keyCode){
-    //     //left arrow
-    //     case 37:
-    //     moveLeft = moveLeft - 10;
-    //     spaceship.setAttribute("x",moveLeft);
-
-    //     //right arrow
-    //     case 39:
-    //     moveRight = moveRight + 10;
-    //     spaceship.setAttribute("x", moveRight);
-    //   }
-    // }
-
-    function isKeyDown(keyCode){
-        return keyStatus[keyCode]
-    }
-
-    //Callbacks for discrete key events
-    function onKeyDown(event){
-
-      // var elapsed = 0;
-      // var timeNow = new Date().getTime() / 1000; //  ilAll expressed in seconds
-      //   if (lastTime != 0) {
-      //       elapsed = timeNow - lastTime;
-      //   } else {
-      //       startTime = timeNow;
-      //   }
-      // lastTime = timeNow;
-      //  totalElapsed = timeNow - startTime;
-      
-      console.log(event);
-      
-      event.preventDefault();
-      keyStatus[event.keyCode] = true;
-      
-    }
-
-    function onKeyUp(event){
-      // Put your code here
-      //When the keys stop being pressed, delete the elements in keyStatus
-      delete keyStatus[event.keyCode]
-    }
-
-    /*Timing and main loop */
-    var startTime = 0;
-    var lastTime = 0;
-    var elapsed = 0, totalElapsed = 0;
-
-    function updateTime() {
-      var timeNow = new Date().getTime() / 1000; // All expressed in seconds
-      if (lastTime != 0) {
-        elapsed = timeNow - lastTime;
-      } else {
-        startTime = timeNow;
-      }
-      lastTime = timeNow;
-      totalElapsed = timeNow - startTime;
-    }
-
-    // Timer callback for animations
-    function onTick() {
-        // 
-          updateTime()
-          animate();
-          drawAll();
-        
-        requestAnimFrame(onTick);
-    }
-
-    function animate(){
-        params.vx = 0;
-        params.vy = 0;
-
-        //React to arrow right
-        if(isKeyDown(39)){
-          console.log("x0: ",params.x0,"y0: ",params.y0)
-          params.x0 += (params.fixedVelocity*elapsed) 
-        }
-        //React to arrow left
-        else if(isKeyDown(37) && params.x0 >= 0){
-          console.log("x0: ",params.x0,"y0: ",params.y0)
-          params.x0 -= (params.fixedVelocity*elapsed) 
-        }
-
-    }
-
-    function drawShip(ctx){
-      // ship = document.getElementById('ship');
-
-      ctx.translate(params.x0,params.y0);
-
-      ctx.drawImage(ship,0,350, 170,100);
-
-    }
-
-    function drawAll(){
-      //Reset before clearing the canvas
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      // space = document.getElementById('background');
-      space = document.getElementById('background');
-      ship = document.getElementById('ship');
-      //Draw the background image of space
-      // ctx.drawImage(space,0,0,888,483);
-
-      var pattern = ctx.createPattern(space,'repeat-x');
-      ctx.rect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = pattern;
-      ctx.fill();
-
-      drawShip(ctx);
-
-    }
-
-    function start(){
-      canvas = document.getElementById('canvas');
-
-      ctx = canvas.getContext('2d');
-      initParams();
-      initKeys(canvas);
-
-      drawAll();
-
-      onTick();
-    }
-    var storyId = '';
-  //Set the nav item as active
-    
- 
-    
-  // for(var i = 0; i < links.length; i++){
-  //   console.log(links[i].href);
-  // };
-
-
-    //Set textbox 1
-    function turnoff(){
-      var off = document.getElementById('textBox1');
-      if(off.style.display == "none"){
-          off.style.display = "block";
-      }else{
-        off.style.display = "none";
-      }
-
-    }
     
   </script>
 
-<body  onload="start()">
+<body ">
 
 <div class="navigation">
 <ul class="nav">
