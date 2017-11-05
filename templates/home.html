@@ -19,6 +19,7 @@
 <script>
   //variable App either returns the attributes if it's ready or an empty object
   var App = window.App || {};
+  // var link = "#home";
 
   //For a cleaner code, all of the functions and variables for the canvas can be added
   //to one object
@@ -27,12 +28,24 @@
         moveRight = 0,
         keyStatus = {},
         canvas,
-        ctx;
+        ctx,
+        links = "#home";
 
+        // console.log("Links 1", links)
       /*Timing and main loop */
+      var currentState = history.state
+      // console.log("Curr: ",currentState)
+      move=false;
+
       var startTime = 0;
       var lastTime = 0;
       var elapsed = 0, totalElapsed = 0;
+      var newLink = [];
+
+      ship = {
+        width : 170,
+        height : 100
+      }
 
       window.requestAnimFrame = (function() {
       return window.requestAnimationFrame ||
@@ -47,6 +60,7 @@
     init = function(){
       this.initParams();
       start();
+
     },
     
     start = function() {
@@ -62,6 +76,9 @@
       drawAll();
 
       onTick();
+      boxEffect();
+
+      
     },
 
     initParams = function(){
@@ -83,6 +100,7 @@
         // Register the keyDown and keyUp events
         canvas.addEventListener( "keydown", onKeyDown, true);
         canvas.addEventListener( "keyup", onKeyUp, true);
+         canvas.addEventListener( "boxeffect", boxEffect, true);
     },
     isKeyDown = function(keyCode){
         return keyStatus[keyCode]
@@ -112,6 +130,20 @@
       totalElapsed = timeNow - startTime;
     },
 
+    boxEffect = function(links){
+      
+      // console.log("L: ",links)
+
+      box1 = document.getElementById("textBox1")
+
+      if (links == "#home" || links == undefined){   
+        box1.style.display = "block";
+      }else{
+        box1.style.display = "none";
+      }
+      
+    },
+
     // Timer callback for animations
     onTick = function(){
         // 
@@ -121,21 +153,52 @@
         
         requestAnimFrame(onTick);
     },
+
+    changeUrlHash = function(event){
+
+    },
     animate = function(){
         params.vx = 0;
         params.vy = 0;
-
+        // console.log("here")
+        // console.log("links: ", links)
         //React to arrow right
         if(isKeyDown(39)){
           console.log("x0: ",params.x0,"y0: ",params.y0)
-          params.x0 += (params.fixedVelocity*elapsed) 
+          params.x0 += (params.fixedVelocity*elapsed)
+           // $.fn.gotof();
+
         }
         //React to arrow left
-        else if(isKeyDown(37) && params.x0 >= 0){
+        else if(isKeyDown(37)){
           console.log("x0: ",params.x0,"y0: ",params.y0)
-          params.x0 -= (params.fixedVelocity*elapsed) 
+          //At least we can access links through here
+          if ((links== "#home" || links == undefined) && params.x0 < 1){
+             params.x0 -=0
+          }
+          else{
+            params.x0 -= (params.fixedVelocity*elapsed)
+          }
+        }
+        //Space bar pressing - use for testing
+        if(isKeyDown(32)){
+          move = true;
+          console.log("M1: ",move)
+          // changeUrlHash(32);
+
         }
 
+        if(params.x0 > canvas.width ){
+          links = "#education"
+
+
+          params.x0 = 0;
+          console.log("Test", links)
+
+        }else if (params.x0 < -170){
+            params.x0 = 0;
+        }
+  
     }
 
     drawShip = function(ctx){
@@ -173,22 +236,36 @@
 //all of the json script goes here
 
   $(function(){
+
     App.myCanvas();
+    //activate function when navbar items are pressed
+    $('.nav a').on('click',function (event) {
+        links = '#home';
+        event.preventDefault();
 
-    App.links = '#home';
-    $('.nav a').on('click',function (ev) {
-        ev.preventDefault();
-
-        console.log(ev.target)
-        links = $(ev.target).attr('href');
+        // console.log(ev.target)
+        links = $(event.target).attr('href');
         //push the href to the end of the link
-        console.log(links);
+        //console.log("Link 0: ", links)
         window.history.pushState('','',links)
         //removing the previous selected menu state
         $('.nav').find('li.active').removeClass('active');
         //adding the state for this parent menu
         $(this).parents("li").addClass('active');
+
+        //Something odd happening, boxEffect will only work when passed links as 
+        // parameter. Not sure if safe.
+        boxEffect(links);
+        // console.log("Link 2: ",App.links )
+
+        console.log("Move 2: ",move);
     });
+
+    // function moveHref(){
+    //     alert("progress");
+    // }
+    // move = moveHref;
+
   });
 
     
@@ -222,7 +299,7 @@
     <!-- Gotta edit canvas dimensions -->
     <canvas id="canvas" width="1240" height="480" class:"bodyCanvas" ></canvas>
   </tb>
-  <div onload="turnoff()" id="textBox1" class="inTextBox" style=stat>
+  <div onclick="boxEffect()" id="textBox1" class="inTextBox" style=stat>
     <p>Move the ship left by pressing &#8592; and move right by pressing &#8594;</p>
   </div> 
 
