@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="148.31757"
+   height="151.4075"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="blueStar.svg">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1285"
+     inkscape:window-height="664"
+     id="namedview14"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.92261905"
+     inkscape:cx="165.2703"
+     inkscape:cy="36.299852"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+  <g
+     id="g4"
+     transform="translate(-2.7297,-2.49235)">
+    <title
+       id="title6">background</title>
+    <rect
+       id="canvas_background"
+       height="402"
+       width="582"
+       y="-1"
+       x="-1"
+       style="fill:#ffffff" />
+  </g>
+  <g
+     id="g9"
+     transform="translate(-2.7297,-2.49235)">
+    <title
+       id="title11">Layer 1</title>
+    <path
+       id="svg_82"
+       class="st79"
+       d="m 15.0895,17.94209 49.43918,6.1799 46.34924,-21.62964 9.26985,49.43918 30.89949,33.98944 -40.16934,24.71959 L 86.15833,153.89985 49.07894,123.00036 2.7297,110.64056 21.2694,67.38128 15.0895,17.94209 Z"
+       inkscape:connector-curvature="0"
+       style="fill:#1bb2cc" />
+  </g>
+</svg>

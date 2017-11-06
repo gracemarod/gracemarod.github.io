@@ -24,6 +24,7 @@
   //For a cleaner code, all of the functions and variables for the canvas can be added
   //to one object
   App.myCanvas =  function(){
+        //Ship and canvas     
     var moveLeft = 0,
         moveRight = 0,
         keyStatus = {},
@@ -38,20 +39,26 @@
       // console.log("Curr: ",currentState)
       prevLinkBool = false;
 
+      //Time variables
       var startTime = 0;
       var lastTime = 0;
       var elapsed = 0, totalElapsed = 0;
       var newLink = [];
 
+      //Variable fo stars
+      var fps = 50;
+      var numStars = 200;
 
+      //Url manipulation variables
       var selector, elems, makeActive;
 
+      //Select nav items as list
       selector = '.nav li';
-
+      //Save it in an array
       elems = document.querySelectorAll(selector);
-
       getElemHashes = document.querySelectorAll('.nav a')
 
+      //For easier management, save the hashes only
       elemHashes = []
       for (var i = 0; i < getElemHashes.length; i++){
         elemHashes.push(getElemHashes[i].hash)
@@ -100,6 +107,7 @@
         'fixedVelocity': 300, // 20 pix/s
         'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
       }
+      flameEndX = params.x0;
     }
     initKeys = function(canvas){
         // Make sure the canvas can receive the key events
@@ -109,9 +117,8 @@
         // Register the keyDown and keyUp events
         canvas.addEventListener( "keydown", onKeyDown, true);
         canvas.addEventListener( "keyup", onKeyUp, true);
-         canvas.addEventListener( "boxeffect", boxEffect, true);
          
-         for (var i = 0; i < elems.length; i++)
+        for (var i = 0; i < elems.length; i++)
             elems[i].addEventListener('mousedown', makeActive);
 
     },
@@ -127,7 +134,6 @@
       keyStatus[event.keyCode] = true;
     }, 
     onKeyUp = function(event){
-      // Put your code here
       //When the keys stop being pressed, delete the elements in keyStatus
       delete keyStatus[event.keyCode]
     },
@@ -273,10 +279,21 @@
     drawShip = function(ctx){
       // ship = document.getElementById('ship');
 
-      ctx.translate(params.x0,params.y0);
+      // ctx.translate(params.x0,params.y0);
 
-      ctx.drawImage(ship,0,350, 170,100);
+      ctx.drawImage(ship,2,350, 170,100);
 
+    },
+
+    drawlightFire = function(ctx){
+      // ctx.translate(params.x0,params.y0);
+      ctx.drawImage(lightFire,0,350, 25,18);
+    },
+
+    drawDarkFire = function(ctx){
+      // ctx.translate(params.x0,params.y0);
+      flameX = elapsed * Math.random();
+      ctx.drawImage(darkFire,flameX,350, 35,25);
     },
 
     drawAll = function(){
@@ -286,6 +303,8 @@
       // space = document.getElementById('background');
       space = document.getElementById('background');
       ship = document.getElementById('ship');
+      lightFire = document.getElementById('lightFire');
+      darkFire = document.getElementById('darkFire');
       //Draw the background image of space
       // ctx.drawImage(space,0,0,888,483);
 
@@ -294,7 +313,27 @@
       ctx.fillStyle = pattern;
       ctx.fill();
 
+      ctx.save();
+      ctx.translate(params.x0, params.y0);
       drawShip(ctx);
+      ctx.restore();
+      
+
+      
+      if (isKeyDown(39) || isKeyDown(37)){
+        
+        ctx.save()
+        ctx.translate(params.x0+7, params.y0+34)
+        drawDarkFire(ctx);
+        ctx.restore();
+
+        ctx.save()
+        ctx.translate(params.x0+16, params.y0+37)
+        drawlightFire(ctx);
+        ctx.restore();
+      }
+      // drawlightFire(ctx);
+ 
 
     }
 
@@ -362,7 +401,9 @@
     <img id="background" src="../static/img/space_background.png" > 
 
     <!-- Spaceship recovered from https://www.vecteezy.com/ -->
-    <img id="ship"  src="../static/img/spaceship.svg"> 
+    <img id="ship"  src="../static/img/spaceship1.svg"> 
+    <img id="lightFire" src="../static/img/lightFire.svg">
+    <img id="darkFire" src="../static/img/darkFire.svg">
   </div>
   <tb>
     <!-- Gotta edit canvas dimensions -->
