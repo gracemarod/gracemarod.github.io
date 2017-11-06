@@ -29,7 +29,8 @@
         keyStatus = {},
         canvas,
         ctx;
-        // links = "#home";
+
+       links = "#home";
 
         // console.log("Links 1", links)
       /*Timing and main loop */
@@ -43,12 +44,18 @@
       var newLink = [];
 
 
-
       var selector, elems, makeActive;
 
       selector = '.nav li';
 
       elems = document.querySelectorAll(selector);
+
+      getElemHashes = document.querySelectorAll('.nav a')
+
+      elemHashes = []
+      for (var i = 0; i < getElemHashes.length; i++){
+        elemHashes.push(getElemHashes[i].hash)
+      }
 
       window.requestAnimFrame = (function() {
       return window.requestAnimationFrame ||
@@ -81,7 +88,6 @@
       onTick();
       boxEffect();
 
-      
     },
 
     initParams = function(){
@@ -127,15 +133,29 @@
     },
     
     //Activate new nav item 
+    //Example taken from http://jsfiddle.net/rn3nc/1/
     makeActive = function () {
-        // event.preventDefault();
       links = $(event.target).attr('href');
+      //console.log("Push link: ",links)
       window.history.pushState('','',links)
 
     for (var i = 0; i < elems.length; i++)
         elems[i].classList.remove('active');
 
       this.classList.add('active');
+    },
+    
+    makeActiveWithShip = function(next){
+
+      console.log("L1: ",links)
+      //next is the index of the next nav item
+      links = elemHashes[next]
+      window.history.pushState('','',links)
+
+      elems[next-1].classList.remove('active');
+
+      elems[next].classList.add('active');
+
     },
 
     updateTime = function(){
@@ -150,9 +170,7 @@
     },
 
     boxEffect = function(links){
-      
-      // console.log("L: ",links)
-
+ 
       box1 = document.getElementById("textBox1")
 
       if (links == "#home" || links == undefined){   
@@ -165,7 +183,6 @@
 
     // Timer callback for animations
     onTick = function(){
-        // 
           updateTime()
           animate();
           drawAll();
@@ -195,20 +212,28 @@
             params.x0 -= (params.fixedVelocity*elapsed)
           }
         }
+
         //Space bar pressing - use for testing
-        if(isKeyDown(32)){
-          prevLinkBool = true;
-          console.log("M1: ",prevLinkBool)
-          // changeUrlHash(32);
+                
+        // if(isKeyDown(32)){
+           
+        // }
 
-        }
-
-        if(params.x0 > canvas.width ){
-          links = "#education"
-
-
+        //When ship goes to the end of the canvas
+        if(params.x0 > canvas.width){
           params.x0 = 0;
-          console.log("Test", links)
+          console.log("HERE!")
+
+          prevLinkBool = true;
+          //console.log("Link: ",links)
+          //console.log(elemHashes)
+          
+          curr = elemHashes.indexOf(links)
+          //console.log("Current h: ",curr)      
+          next = curr + 1
+          
+          if (next < elemHashes.length)
+              makeActiveWithShip(next);
 
         }else if (params.x0 < -170){
             params.x0 = 0;
