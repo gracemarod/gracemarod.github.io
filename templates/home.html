@@ -28,24 +28,27 @@
         moveRight = 0,
         keyStatus = {},
         canvas,
-        ctx,
-        links = "#home";
+        ctx;
+        // links = "#home";
 
         // console.log("Links 1", links)
       /*Timing and main loop */
       var currentState = history.state
       // console.log("Curr: ",currentState)
-      move=false;
+      prevLinkBool = false;
 
       var startTime = 0;
       var lastTime = 0;
       var elapsed = 0, totalElapsed = 0;
       var newLink = [];
 
-      ship = {
-        width : 170,
-        height : 100
-      }
+
+
+      var selector, elems, makeActive;
+
+      selector = '.nav li';
+
+      elems = document.querySelectorAll(selector);
 
       window.requestAnimFrame = (function() {
       return window.requestAnimationFrame ||
@@ -101,6 +104,10 @@
         canvas.addEventListener( "keydown", onKeyDown, true);
         canvas.addEventListener( "keyup", onKeyUp, true);
          canvas.addEventListener( "boxeffect", boxEffect, true);
+         
+         for (var i = 0; i < elems.length; i++)
+            elems[i].addEventListener('mousedown', makeActive);
+
     },
     isKeyDown = function(keyCode){
         return keyStatus[keyCode]
@@ -117,6 +124,18 @@
       // Put your code here
       //When the keys stop being pressed, delete the elements in keyStatus
       delete keyStatus[event.keyCode]
+    },
+    
+    //Activate new nav item 
+    makeActive = function () {
+        // event.preventDefault();
+      links = $(event.target).attr('href');
+      window.history.pushState('','',links)
+
+    for (var i = 0; i < elems.length; i++)
+        elems[i].classList.remove('active');
+
+      this.classList.add('active');
     },
 
     updateTime = function(){
@@ -153,10 +172,6 @@
         
         requestAnimFrame(onTick);
     },
-
-    changeUrlHash = function(event){
-
-    },
     animate = function(){
         params.vx = 0;
         params.vy = 0;
@@ -182,8 +197,8 @@
         }
         //Space bar pressing - use for testing
         if(isKeyDown(32)){
-          move = true;
-          console.log("M1: ",move)
+          prevLinkBool = true;
+          console.log("M1: ",prevLinkBool)
           // changeUrlHash(32);
 
         }
@@ -198,8 +213,7 @@
         }else if (params.x0 < -170){
             params.x0 = 0;
         }
-  
-    }
+    },
 
     drawShip = function(ctx){
       // ship = document.getElementById('ship');
@@ -208,7 +222,7 @@
 
       ctx.drawImage(ship,0,350, 170,100);
 
-    }
+    },
 
     drawAll = function(){
       //Reset before clearing the canvas
@@ -236,35 +250,33 @@
 //all of the json script goes here
 
   $(function(){
-
     App.myCanvas();
-    //activate function when navbar items are pressed
-    $('.nav a').on('click',function (event) {
-        links = '#home';
-        event.preventDefault();
+    // var $navigationItem = $('.nav a'),
+    //     $navigationItemActive = $('li.activate');
+    //     links = '#home';
 
+    // //activate function when navbar items are pressed
+    // $navigationItem.on('click',function (event) {
+    //     var $item = $(this)
+
+    //     event.preventDefault();
+    //     links = $(event.target).attr('href');
+    //     window.history.pushState('','',links)
+        //highlightItem($item);
         // console.log(ev.target)
-        links = $(event.target).attr('href');
+        
         //push the href to the end of the link
         //console.log("Link 0: ", links)
-        window.history.pushState('','',links)
-        //removing the previous selected menu state
-        $('.nav').find('li.active').removeClass('active');
-        //adding the state for this parent menu
-        $(this).parents("li").addClass('active');
+      
+    // });
 
-        //Something odd happening, boxEffect will only work when passed links as 
-        // parameter. Not sure if safe.
-        boxEffect(links);
-        // console.log("Link 2: ",App.links )
-
-        console.log("Move 2: ",move);
-    });
-
-    // function moveHref(){
-    //     alert("progress");
+    // function highlightItem($item){        
+    //     window.history.pushState('','',links)
+    //     //removing the previous selected menu state
+    //     $('.nav').find('li.active').removeClass('active');
+    //     //adding the state for this parent menu
+    //     $item.parents("li").addClass('active');
     // }
-    // move = moveHref;
 
   });
 

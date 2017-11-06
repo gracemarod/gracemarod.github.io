@@ -1,0 +1,18 @@
+    var $navItem = $('#naviBar li'),
+        $prevLink = $('#prevLink'),
+        $nextLink = $('#nextLink');
+
+    $navItem.on('click',function() {
+      links = '#home';
+      links = $(event.target).attr('href');
+      window.history.pushState('','',links)
+      
+      var $item = $(this);
+      highlightItem($item)
+    });
+
+
+    function highlightItem($item){
+      $navItem.removeClass('active');
+      $item.toggleClass('active');
+  }    
