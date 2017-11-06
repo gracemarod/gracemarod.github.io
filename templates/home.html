@@ -97,7 +97,7 @@
         'fixedDisplacement': 20, // 20 pix/s
         'angleStep': 15, // 15 deg for each keyPress
         // For Mode 1
-        'fixedVelocity': 200, // 20 pix/s
+        'fixedVelocity': 300, // 20 pix/s
         'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
       }
     }
@@ -145,14 +145,20 @@
       this.classList.add('active');
     },
     
-    makeActiveWithShip = function(next){
+    makeActiveWithShip = function(next,whichNavItem){
 
       console.log("L1: ",links)
       //next is the index of the next nav item
       links = elemHashes[next]
+      //push new hash to url
       window.history.pushState('','',links)
 
-      elems[next-1].classList.remove('active');
+      //Check which direction ship is going to subtract or add for the change
+      //of nav item
+      if(whichNavItem == "next")
+        elems[next-1].classList.remove('active');
+      else
+        elems[next+1].classList.remove('active');
 
       elems[next].classList.add('active');
 
@@ -169,13 +175,28 @@
       totalElapsed = timeNow - startTime;
     },
 
-    boxEffect = function(links){
+    boxEffect = function(){
  
       box1 = document.getElementById("textBox1")
+      box2 = document.getElementById("textBox2")
+      box3 = document.getElementById("textBox3")
 
       if (links == "#home" || links == undefined){   
         box1.style.display = "block";
-      }else{
+        box2.style.display = "none";
+        box3.style.display = "none";
+      }else if( links == "#education"){
+        box1.style.display = "none";
+        box2.style.display = "block";
+        box3.style.display = "none";
+      }else if(links == "#skills"){
+        box1.style.display = "none";
+        box2.style.display = "none";
+        box3.style.display = "block";
+      }
+      else{
+        box3.style.display = "none";
+        box2.style.display = "none";
         box1.style.display = "none";
       }
       
@@ -192,13 +213,20 @@
     animate = function(){
         params.vx = 0;
         params.vy = 0;
+        whichNavItem = "";
         // console.log("here")
         // console.log("links: ", links)
+
         //React to arrow right
         if(isKeyDown(39)){
           console.log("x0: ",params.x0,"y0: ",params.y0)
-          params.x0 += (params.fixedVelocity*elapsed)
-           // $.fn.gotof();
+
+          if (links =="#experience" && params.x0 > canvas.width-150){
+             params.x0 +=0
+          }
+          else{
+            params.x0 += (params.fixedVelocity*elapsed)
+          }
 
         }
         //React to arrow left
@@ -213,31 +241,33 @@
           }
         }
 
-        //Space bar pressing - use for testing
-                
-        // if(isKeyDown(32)){
-           
-        // }
-
         //When ship goes to the end of the canvas
         if(params.x0 > canvas.width){
           params.x0 = 0;
-          console.log("HERE!")
-
-          prevLinkBool = true;
-          //console.log("Link: ",links)
-          //console.log(elemHashes)
+          whichNavItem = "next";
           
-          curr = elemHashes.indexOf(links)
-          //console.log("Current h: ",curr)      
+          curr = elemHashes.indexOf(links)    
           next = curr + 1
           
           if (next < elemHashes.length)
-              makeActiveWithShip(next);
+              makeActiveWithShip(next,whichNavItem);
 
+        //when the ship goes to the beginning of the canvas
         }else if (params.x0 < -170){
-            params.x0 = 0;
+          params.x0 = canvas.width - 150;
+          whichNavItem = "prev";
+          curr = elemHashes.indexOf(links)
+          //console.log("Current h: ",curr)      
+          next = curr - 1
+          
+          if (next >= 0)
+              makeActiveWithShip(next,whichNavItem);
         }
+        //Space bar pressing - use for testing                
+        // if(isKeyDown(32)){
+           
+        // }
+        boxEffect();
     },
 
     drawShip = function(ctx){
@@ -330,6 +360,8 @@
 <div class="bodyContent" onload="start();">
   <div style="display:none;">
     <img id="background" src="../static/img/space_background.png" > 
+
+    <!-- Spaceship recovered from https://www.vecteezy.com/ -->
     <img id="ship"  src="../static/img/spaceship.svg"> 
   </div>
   <tb>
@@ -338,6 +370,22 @@
   </tb>
   <div onclick="boxEffect()" id="textBox1" class="inTextBox" style=stat>
     <p>Move the ship left by pressing &#8592; and move right by pressing &#8594;</p>
+    <p>Make sure the image is pressed.</p>
+  </div> 
+
+  <div onclick="boxEffect()" id="textBox2" class="inTextBox" style=stat>
+    <p>Bachelor of Science in Computer Science</p>
+    <p>University of Puerto Rico - Rio Piedras Campus</p>
+  </div> 
+
+  <div onclick="boxEffect()" id="textBox3" class="inTextBox" style=stat>
+    <p class="title">---------------------------- Code ----------------------------</p>
+    <p>html - css - python - javascript</p>
+    <p class="title">---------------------------- Design ----------------------------</p>
+    <p>Photoshop - Gimp - Ink </p>
+    <p class="title">--------------------------- Others ---------------------------</p>
+    <p>Fluent in Spanish and English - Unity3d - git - Unix </p> 
+
   </div> 
 
 <!-- 

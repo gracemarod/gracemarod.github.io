@@ -70,7 +70,7 @@ display: inline-block;
     width: 100%;
 }
 
-.inTextBox{
+#textBox1{
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px; 
@@ -86,7 +86,52 @@ display: inline-block;
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
 
-
     top: 130px;
     left: 50px;
+}
+
+#textBox2{
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px; 
+	border-bottom-left-radius: 6px;
+	position: absolute;
+	float: right;
+    background-color:#efefef; 
+    width: 500px;
+    height: 150px ;
+    border: 4px solid #aaaaaa;
+    padding: 10px;
+    opacity: 0.8;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    top: 130px;
+    left: 725px;
+}
+
+#textBox3{
+	line-height: 0.8;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px; 
+	border-bottom-left-radius: 6px;
+	position: absolute;
+	float: right;
+    background-color:#efefef; 
+    width: 500px;
+    height: 150px ;
+    border: 4px solid #aaaaaa;
+    padding: 10px;
+    opacity: 0.8;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    top: 130px;
+    left: 725px;
+    overflow: scroll;
+}
+
+.title{
+	text-align: center;
+	color: #a5a5a5;
 }
