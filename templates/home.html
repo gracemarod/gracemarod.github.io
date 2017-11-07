@@ -32,7 +32,12 @@
         ctx;
 
        links = "#home";
+    
+    var opacity = 1, 
+        factor = 1,
+        increment = .01;
 
+        var steps = 50;
         // console.log("Links 1", links)
       /*Timing and main loop */
       var currentState = history.state
@@ -44,10 +49,6 @@
       var lastTime = 0;
       var elapsed = 0, totalElapsed = 0;
       var newLink = [];
-
-      //Variable fo stars
-      var fps = 50;
-      var numStars = 200;
 
       //Url manipulation variables
       var selector, elems, makeActive;
@@ -93,7 +94,6 @@
       drawAll();
 
       onTick();
-      boxEffect();
 
     },
 
@@ -104,7 +104,7 @@
         'fixedDisplacement': 20, // 20 pix/s
         'angleStep': 15, // 15 deg for each keyPress
         // For Mode 1
-        'fixedVelocity': 300, // 20 pix/s
+        'fixedVelocity': 400, // 20 pix/s
         'fixedAcceleration': 0.1 // 0.1 pix/s velocity if accelerate for 1s
       }
       flameEndX = params.x0;
@@ -153,7 +153,6 @@
     
     makeActiveWithShip = function(next,whichNavItem){
 
-      console.log("L1: ",links)
       //next is the index of the next nav item
       links = elemHashes[next]
       //push new hash to url
@@ -296,6 +295,58 @@
       ctx.drawImage(darkFire,flameX,350, 35,25);
     },
 
+    drawStars = function(ctx){
+      
+        ctx.beginPath();
+        //Top
+        ctx.moveTo(100, 50);
+        ctx.lineTo(83, 85);
+        //Top Left end
+        ctx.lineTo(48,100);
+        ctx.lineTo(80,115);
+        //Bottom left end
+        ctx.lineTo(68,155);
+        //Bottom
+        ctx.lineTo(100,135);
+        //Bottom right end
+        ctx.lineTo(130,155);
+        ctx.lineTo(125,115);
+    
+        //Top right End
+        ctx.lineTo(153,100);
+        ctx.lineTo(118, 85);
+        ctx.closePath();
+  
+     },
+    
+    fade = function(ctx){
+
+        // interval = setInterval(function() {
+     
+      if(opacity >= 1) {
+        factor = -1
+        // clearInterval(interval)
+      }
+      else if(opacity <= 0) {
+        factor = 1 ;
+      }
+      opacity += factor *increment;
+      // console.log("opacity",opacity);
+
+      //ctx.clearRect(0, 0, canvas.width, canvas.height);
+      //ctx.beginPath();
+      ctx.translate(200, 200);
+      ctx.rotate(45*Math.PI/180)
+      ctx.fillStyle = 'rgba(255, 255, 200, ' + opacity + ')';
+      ctx.shadowBlur = 5;
+      ctx.shadowColor = '#ffff33';
+      ctx.fillRect(0,0,5,5)
+      // drawStars(ctx);
+        // }, 1000/steps);
+
+
+    },
+
     drawAll = function(){
       //Reset before clearing the canvas
       ctx.setTransform(1,0,0,1,0,0);
@@ -305,19 +356,26 @@
       ship = document.getElementById('ship');
       lightFire = document.getElementById('lightFire');
       darkFire = document.getElementById('darkFire');
-      //Draw the background image of space
-      // ctx.drawImage(space,0,0,888,483);
+      
 
+      //Draw background      
       var pattern = ctx.createPattern(space,'repeat-x');
       ctx.rect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = pattern;
       ctx.fill();
 
+
+
+      //Fade in effect
+      ctx.save();
+      fade(ctx);
+      ctx.restore();
+
       ctx.save();
       ctx.translate(params.x0, params.y0);
       drawShip(ctx);
       ctx.restore();
-      
+
 
       
       if (isKeyDown(39) || isKeyDown(37)){
@@ -345,6 +403,7 @@
 
   $(function(){
     App.myCanvas();
+
     // var $navigationItem = $('.nav a'),
     //     $navigationItemActive = $('li.activate');
     //     links = '#home';
@@ -404,6 +463,8 @@
     <img id="ship"  src="../static/img/spaceship1.svg"> 
     <img id="lightFire" src="../static/img/lightFire.svg">
     <img id="darkFire" src="../static/img/darkFire.svg">
+    <img id="blueStar" src="../static/img/blueStar.svg">
+    <img id="whiteStar" src="../static/img/whiteStar.svg">
   </div>
   <tb>
     <!-- Gotta edit canvas dimensions -->
