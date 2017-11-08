@@ -33,12 +33,12 @@
 
        links = "#home";
     
+    //Values to set opacity for fading
     var opacity = 1, 
         factor = 1,
         increment = .01;
+    var numStars = 60;
 
-        var steps = 50;
-        // console.log("Links 1", links)
       /*Timing and main loop */
       var currentState = history.state
       // console.log("Curr: ",currentState)
@@ -86,8 +86,12 @@
       console.log("starting...");
 
       canvas = document.getElementById('canvas');
-
       ctx = canvas.getContext('2d');
+
+      xVal = Array.from({length: numStars}, () => Math.floor(Math.random() * canvas.width));
+      yVal = Array.from({length: numStars}, () => Math.floor(Math.random() * canvas.height));
+      op = Array.from({length: numStars}, () => Math.random());
+
       initParams();
       initKeys(canvas);
 
@@ -296,33 +300,50 @@
     },
 
     drawStars = function(ctx){
+
       
-        ctx.beginPath();
-        //Top
-        ctx.moveTo(100, 50);
-        ctx.lineTo(83, 85);
-        //Top Left end
-        ctx.lineTo(48,100);
-        ctx.lineTo(80,115);
-        //Bottom left end
-        ctx.lineTo(68,155);
-        //Bottom
-        ctx.lineTo(100,135);
-        //Bottom right end
-        ctx.lineTo(130,155);
-        ctx.lineTo(125,115);
+        // ctx.beginPath();
+        // //Top
+        // ctx.moveTo(100, 50);
+        // ctx.lineTo(83, 85);
+        // //Top Left end
+        // ctx.lineTo(48,100);
+        // ctx.lineTo(80,115);
+        // //Bottom left end
+        // ctx.lineTo(68,155);
+        // //Bottom
+        // ctx.lineTo(100,135);
+        // //Bottom right end
+        // ctx.lineTo(130,155);
+        // ctx.lineTo(125,115);
     
-        //Top right End
-        ctx.lineTo(153,100);
-        ctx.lineTo(118, 85);
-        ctx.closePath();
-  
+        // //Top right End
+        // ctx.lineTo(153,100);
+        // ctx.lineTo(118, 85);
+        // ctx.closePath();
+        
+
      },
+
+     createStars = function(ctx,x,y,opacity){
+
+        ctx.translate(x, y);
+        ctx.beginPath()
+        ctx.rotate(45*Math.PI/180)
+        ctx.fillStyle = 'rgba(255, 255, 200, ' + opacity + ')';
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = '#ffff33';
+        ctx.fillRect(0,0,5,5);
+        ctx.closePath();
+
+
+     },
+
     
     fade = function(ctx){
 
-        // interval = setInterval(function() {
      
+      
       if(opacity >= 1) {
         factor = -1
         // clearInterval(interval)
@@ -333,18 +354,18 @@
       opacity += factor *increment;
       // console.log("opacity",opacity);
 
-      //ctx.clearRect(0, 0, canvas.width, canvas.height);
-      //ctx.beginPath();
-      ctx.translate(200, 200);
-      ctx.rotate(45*Math.PI/180)
-      ctx.fillStyle = 'rgba(255, 255, 200, ' + opacity + ')';
-      ctx.shadowBlur = 5;
-      ctx.shadowColor = '#ffff33';
-      ctx.fillRect(0,0,5,5)
+      for (var j = 0; j < numStars;j++){
+          ctx.save();
+          createStars(ctx,xVal[j],yVal[j],opacity);
+          ctx.restore();
+      }
+
+      // ctx.save();
+      // createStars(ctx,400,300,opacity);
+      // ctx.restore();
+      // ctx.save();
       // drawStars(ctx);
         // }, 1000/steps);
-
-
     },
 
     drawAll = function(){
@@ -364,20 +385,11 @@
       ctx.fillStyle = pattern;
       ctx.fill();
 
-
-
       //Fade in effect
       ctx.save();
       fade(ctx);
       ctx.restore();
 
-      ctx.save();
-      ctx.translate(params.x0, params.y0);
-      drawShip(ctx);
-      ctx.restore();
-
-
-      
       if (isKeyDown(39) || isKeyDown(37)){
         
         ctx.save()
@@ -390,6 +402,12 @@
         drawlightFire(ctx);
         ctx.restore();
       }
+
+      ctx.save();
+      ctx.translate(params.x0, params.y0);
+      drawShip(ctx);
+      ctx.restore();
+ 
       // drawlightFire(ctx);
  
 
@@ -482,11 +500,11 @@
 
   <div onclick="boxEffect()" id="textBox3" class="inTextBox" style=stat>
     <p class="title">---------------------------- Code ----------------------------</p>
-    <p>html - css - python - javascript</p>
+    <p>Html5 - Css - Python - Javascript</p>
     <p class="title">---------------------------- Design ----------------------------</p>
-    <p>Photoshop - Gimp - Ink </p>
+    <p>Photoshop - Gimp - HTML5 Canvas </p>
     <p class="title">--------------------------- Others ---------------------------</p>
-    <p>Fluent in Spanish and English - Unity3d - git - Unix </p> 
+    <p>Fluent in Spanish and English - Unity3d - Git - Unix </p> 
 
   </div> 
 
