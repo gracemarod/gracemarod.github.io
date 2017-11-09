@@ -320,9 +320,9 @@ display: inline-block;
 	padding-top: 10px;
 	padding-bottom: 10px;
 
-  	/*color: #494949;*/
 }
 
+/* Extra resources for projects*/
 .extras li a {
     text-decoration: none;
 }
@@ -332,4 +332,16 @@ display: inline-block;
 	cursor:pointer;
 	transition: all .2s ease-in-out;
     transform: scale(1.1);
+}
+
+#exp a{
+	color:black;
+	text-decoration: none;
+}
+
+/* Have the work info on hidden until button is pressed*/
+#work #bee{
+	display: none;}
+#work #icert{
+	display:none;
 }
