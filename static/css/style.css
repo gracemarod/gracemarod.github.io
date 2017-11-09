@@ -215,7 +215,7 @@ display: inline-block;
 #work{
 	align-content: center;
 	/*text-align: center;*/
-	
+	font-family: 'Open Sans', sans-serif;
 	padding-top: 50px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -224,8 +224,8 @@ display: inline-block;
 
 /* Company title*/
 #company {
-	font-family: 'Open Sans', sans-serif;
-    font-size: 26px;
+	
+    font-size: 34px;
 	text-align: center;
 	/*opacity: 0.7;*/
 	margin-top: 50px;
@@ -238,7 +238,6 @@ display: inline-block;
 }
 
 #description{
-	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	text-align: center;
 	margin-bottom: 100px;
@@ -270,7 +269,6 @@ display: inline-block;
 
 #panel li{
   	/*float: left;*/
-  	font-family: 'Open Sans', sans-serif;
     font-size: 20px;
   	text-align: center;
   	display:inline-block;
@@ -279,12 +277,59 @@ display: inline-block;
 }
 
 
-/*Photo carousel*/
+/*----------------- Photo carousel ----------------------*/
 .carousel {
 	/*align-content: center;*/
 	margin-top: 10px;
+	margin-bottom: 20px;
 	margin-left: 18%;
 	width:800px;
 }
 
+/*----------------- Tech used ----------------------*/
 
+#expTitles{
+	font-size: 30px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+#tech ul{ 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+ }
+
+
+#tech li{
+  	/*float: left;*/
+    font-size: 20px;
+  	text-align: center;
+  	display:inline-block;
+  	margin: 60px;
+  	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px; 
+	border-bottom-left-radius: 3px;
+	/*border: 1px solid #aaaaaa;*/
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+  	/*color: #494949;*/
+}
+
+.extras li a {
+    text-decoration: none;
+}
+.extras li:hover{
+
+	background-color: #efefef;
+	cursor:pointer;
+	transition: all .2s ease-in-out;
+    transform: scale(1.1);
+}
