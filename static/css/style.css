@@ -1,8 +1,20 @@
-/*Navbar style*/
 
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+
+}
+
+body {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+/*Navbar style*/
 .navigation{
 	padding-top: 20px;
-	padding-left: 20px;
+	/*padding-left: 20px;*/
 }
 
 ul{
@@ -59,17 +71,19 @@ display: inline-block;
 
 /* Body Style*/
 /* Canvas style*/
-.bodyCanvas{
+/*.bodyCanvas{
 	border: solid 1px black
     width: 100%;
 }
 
 #canvas {
-    /*position:absolute;*/
-    border: solid 1px black
+    position:absolute;
+    border: solid 1px black;
     width: 100%;
-}
+}*/
 
+/* ----------------- Info boxes --------------------*/
+/*Home*/
 #textBox1{
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
@@ -79,7 +93,7 @@ display: inline-block;
     float: right;
     background-color:#efefef; 
     width: 450px;
-    height:150px ;
+    height:180px ;
     border: 4px solid #aaaaaa;
     padding: 10px;
     opacity: 0.8;
@@ -90,6 +104,7 @@ display: inline-block;
     left: 50px;
 }
 
+/*Education*/
 #textBox2{
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
@@ -106,10 +121,11 @@ display: inline-block;
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     text-align: center;
-    top: 130px;
-    left: 725px;
+    top: 20%;
+    left: 30%;
 }
 
+/*skills*/
 #textBox3{
 	line-height: 0.8;
 	border-top-left-radius: 6px;
@@ -120,18 +136,155 @@ display: inline-block;
 	float: right;
     background-color:#efefef; 
     width: 500px;
-    height: 150px ;
+    height: 180px ;
     border: 4px solid #aaaaaa;
     padding: 10px;
     opacity: 0.8;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
-    top: 130px;
-    left: 725px;
+    top: 20%;
+    left: 30%;
     overflow: scroll;
 }
 
+/* Experience */
+#textBox4{
+	line-height: 0.8;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px; 
+	border-bottom-left-radius: 6px;
+	position: absolute;
+	float: right;
+    background-color:#efefef; 
+    width: 500px;
+    height: 180px ;
+    border: 4px solid #aaaaaa;
+    padding: 10px;
+    opacity: 0.8;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    top: 20%;
+    left: 30%;
+    overflow: scroll;
+}
 .title{
 	text-align: center;
-	color: #a5a5a5;
+	color: #7f7f7f;
 }
+
+/* Experience */
+#exp{
+	line-height: 1;
+	text-align: center;
+}
+
+#exp ul{ 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+ }
+
+#exp li{
+  	/*float: left;*/
+  	display:inline-block;
+  	margin: 10px;
+  	text-align: center;
+  	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px; 
+	border-bottom-left-radius: 3px;
+  	padding-top: 10px;
+  	padding-right: 5px;
+  	padding-left: 5px;
+  	padding-bottom: 5px;
+  	height: 40px;
+    border: 1px solid #aaaaaa;
+    background-color: white;
+}
+
+#exp li:hover{
+	cursor:pointer;
+	transition: all .2s ease-in-out;
+    transform: scale(1.1);
+}
+
+/* css for Photo carousel*/
+
+#work{
+	align-content: center;
+	/*text-align: center;*/
+	
+	padding-top: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 50px;
+}
+
+/* Company title*/
+#company {
+	font-family: 'Open Sans', sans-serif;
+    font-size: 26px;
+	text-align: center;
+	/*opacity: 0.7;*/
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+#logo {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+#description{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	text-align: center;
+	margin-bottom: 100px;
+	padding-left: 60px;
+	padding-right: 60px;
+
+}
+
+/* Panel for experience info*/
+#panel{
+	align-content: center;
+	/*background-color: #b999fc;*/
+	margin-top: 10px;
+	margin-bottom: 100px;
+	background: linear-gradient(to right, transparent, rgb(185,153,252), transparent 98%);
+				/*linear-gradient(to left, rgb(185,153,252), transparent 25%)	;*/
+	 			/*linear-gradient(336deg, rgba(185,153,252,0), rgba(185,153,252,1) 25%);*/
+	/*background-image: linear-gradient(to left, rgba(185,153,252,0), rgba(185,153,252,1) );*/
+}
+
+#panel ul{ 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+ }
+
+
+#panel li{
+  	/*float: left;*/
+  	font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+  	text-align: center;
+  	display:inline-block;
+  	margin: 20px;
+  	/*color: #494949;*/
+}
+
+
+/*Photo carousel*/
+.carousel {
+	/*align-content: center;*/
+	margin-top: 10px;
+	margin-left: 18%;
+	width:800px;
+}
+
+
