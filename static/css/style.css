@@ -210,19 +210,24 @@ display: inline-block;
     transform: scale(1.1);
 }
 
-/* css for Photo carousel*/
-
 #work{
 	align-content: center;
 	/*text-align: center;*/
 	font-family: 'Open Sans', sans-serif;
-	padding-top: 50px;
+	padding-top: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-bottom: 50px;
 }
 
-/* Company title*/
+
+#scrollDown{
+	text-align: center;
+	font-size: 36px;
+}
+
+/* --------------------- Work div -----------------------------*/
+/* --------------------- Company title ------------------------*/
 #company {
 	
     font-size: 34px;
@@ -237,10 +242,11 @@ display: inline-block;
 	margin-bottom: 100px;
 }
 
+
 #description{
 	font-size: 16px;
 	text-align: center;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	padding-left: 60px;
 	padding-right: 60px;
 
@@ -284,6 +290,15 @@ display: inline-block;
 	margin-bottom: 20px;
 	margin-left: 18%;
 	width:800px;
+}
+
+#project{
+	text-align: center;
+	align-content: center;
+}
+#project img{
+	width:70%;
+	height: 70%;
 }
 
 /*----------------- Tech used ----------------------*/
@@ -343,5 +358,11 @@ display: inline-block;
 #work #bee{
 	display: none;}
 #work #icert{
+	display:none;
+}
+#work #lbnl{
+	display:none;
+}
+#work #cs4hs{
 	display:none;
 }
