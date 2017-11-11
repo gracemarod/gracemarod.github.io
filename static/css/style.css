@@ -13,7 +13,7 @@ body {
 
 /*Navbar style*/
 .navigation{
-	padding-top: 20px;
+	padding-top: 10px;
 	/*padding-left: 20px;*/
 }
 
@@ -49,9 +49,10 @@ ul{
 	border-bottom: 8px solid #e0e0e0;
 }
 
+/* Style for canvas*/
 .bodyContent{
 	margin-top: 20px;
-	margin-bottom: 10px;
+	/*margin-bottom: 0px;*/
 	margin-left: 10px
 	margin-right:10px;
 	padding-right: 15px;
@@ -67,20 +68,6 @@ display: inline-block;
   line-height: 50px; /*for this, it sets vertical alignment*/
 }
 
-
-
-/* Body Style*/
-/* Canvas style*/
-/*.bodyCanvas{
-	border: solid 1px black
-    width: 100%;
-}
-
-#canvas {
-    position:absolute;
-    border: solid 1px black;
-    width: 100%;
-}*/
 
 /* ----------------- Info boxes --------------------*/
 /*Home*/
@@ -369,11 +356,23 @@ display: inline-block;
 
 footer {
 	text-align: center;
+	background-color: #efefef;
+	position:absolute;
+	bottom:0;
+	left: 0;
+	width: 100%;
+	padding:0;
+	/*height:100%;*/
 }
 
 .contact{
+	
+	font-family: 'Open Sans', sans-serif;
 	text-align: center;
-	padding-bottom: 50px;
+	padding-left: 20px;
+	padding-bottom: 40px;
+	padding-top: 15px;
+	background-color: #efefef;
 }
 
 .contact > *{
@@ -408,6 +407,12 @@ footer {
 .name{
 	margin-right: 50px;
 	/*padding-right:20px; */
+}
+
+.name a{
+	color:black;
+	text-decoration: none;
+
 }
 
 .clearfix:before,
