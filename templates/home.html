@@ -243,7 +243,7 @@
         if(isKeyDown(39)){
           console.log("x0: ",params.x0,"y0: ",params.y0)
 
-          if (links =="#experience" && params.x0 > canvas.width-150){
+          if (links =="#education" && params.x0 > canvas.width-150){
              params.x0 +=0
           }
           else{
@@ -377,12 +377,16 @@
       icert = document.getElementById("icert");  
       lbnl = document.getElementById("lbnl"); 
       cs4hs = document.getElementById("cs4hs"); 
+      athon = document.getElementById("athon");
+      donealo = document.getElementById("donealo");
 
       if (links != "#experience"){
         bee.style.display = "none";        
         icert.style.display = "none";
         lbnl.style.display = "none";
         cs4hs.style.display = "none";
+        athon.style.display = "none";
+        donealo.style.display = "none";
       }
     },
 
@@ -489,13 +493,13 @@
     <a href="#home">Home</a>
   </li>
   <li>
-    <a href="#education">Education</a>
-  </li>
-  <li>
     <a href="#skills">Skills</a>
   </li>
   <li>
     <a href="#experience">Experience</a>
+  </li>
+    <li>
+    <a href="#education">Education</a>
   </li>
 </ul>
 <div>
@@ -580,14 +584,13 @@
     </div>
 
     
-    <div id="project">
-        <img src="../static/img/interface.svg">
-    </div>
-
     <div id="description">
       <p>The technology developed in the project LabelBee aims to enable the study of individual behavior of thousands of bees over extended periods of time by using video to track them in front of their colony. My contribution to this project was developing the visualizations that tracked and annotated the bees activities.</p>
     </div>
 
+    <div id="project">
+        <img src="../static/img/interface.svg">
+    </div>
 
 
     <div id="tech">
@@ -617,24 +620,21 @@
       <img src="../static/img/tacc.png">
     </div>
 
-
-    <div id="project">
-        <img src="../static/img/icert.jpg">
-    </div>
-
-
     <div id="panel">
         <ul>
-          <li>Position: Summer Research Intern</li>
+          <li>Role: Summer Research Intern</li>
           <li>Date: June 2016 - August 2016 </li>
           <li>Place: Texas Advanced Computing Center </li>
         </ul>
     </div>
 
-    <div id="description">
+   <div id="description">
       <p>Developed a simulation in virtual reality using Unity3D to create a post-seizure empathy tool.</p>
     </div>
-    
+
+    <div id="project">
+        <img src="../static/img/icert.jpg">
+    </div> 
 
     <div id="tech">
       <ul><p id="expTitles">Technologies Used</p>
@@ -648,7 +648,7 @@
     <div id="tech" class="extras">
       <ul><p id="expTitles">Extra Resources</p>
         <li style="border:3px solid #003462;"><a style="color:#003462;" href="http://gracerodriguez6.wixsite.com/">Blog</a></li>
-        <li style="border:3px solid #003462;"><a style="color:#003462;" href="" >Paper</a></li>
+        <!-- <li style="border:3px solid #003462;"><a style="color:#003462;" href="" >Paper</a></li> -->
     </div>
   </div>
 
@@ -698,7 +698,7 @@
 
     <div id="panel">
         <ul>
-          <li>Position: Technical Assistant </li>
+          <li>Role: Technical Assistant </li>
           <li>Date: February 2015 - May 2015</li>
           <li>Place: UPR-RP</li>
         </ul>
@@ -721,26 +721,128 @@
     </div>
   </div>
 
+  <div id="athon">
+
+    <h2 id="scrollDown">&#8595;</h2>
+
+    <div id="company">
+        <h3>#include&#60;a-thon&#62; 2016</h3>
+    </div>
+
+    <div id="logo">
+      <img src="../static/img/include.jpg">
+    </div>
+
+    <div id="panel">
+        <ul>
+          <li>Role: Front-End Dev</li>
+          <li>Date: October 22 - 23, 2016 </li>
+          <li>Place: San Juan, PR </li>
+        </ul>
+    </div>
+
+
+    <div id="description">
+      <p>Local hackathon with the theme of Asissted Technology.</p>
+    </div>
+
+    <div id="project">
+      <img src="../static/img/athon.svg">
+    </div>
+
+    <div id="tech">
+      <ul><p id="expTitles">Technologies Used</p>
+        <li style="background-color:#ccd0ff; border:3px solid #292A3C;">HTML</li>
+        <li style="background-color:#ccd0ff;  border:3px solid #292A3C;">CSS</li>
+        <li style="background-color:#ccd0ff;  border:3px solid #292A3C;">Bootsrap</li>
+        <li style="background-color:#ccd0ff;  border:3px solid #292A3C;">Python</li>
+      </ul>
+    </div>
+
+    <div id="tech" class="extras">
+      <ul><p id="expTitles">Extra Resources</p>
+        <li style="border:3px solid #292A3C;"><a style="color:#292A3C;" href="http://include-hackathon.herokuapp.com/">Website</a></li>
+    </div>
+  </div>
+
+ <div id="donealo">
+
+    <h2 id="scrollDown">&#8595;</h2>
+
+    <div id="company">
+        <h3>Dónealo</h3>
+    </div>
+
+    <div id="logo">
+      <img src="../static/img/dona.jpg">
+    </div>
+
+    <div id="panel">
+        <ul>
+          <li>Role: Front-End Dev </li>
+          <li>Date: May 2017 - June 2017</li>
+          <li>Place: San Juan, PR</li>
+        </ul>
+    </div>
+
+    <div id="description">
+      <p>Project build for local Hackathon Hackea por una causa. Creates profiles for local non-profit organizations. </p>
+    </div>
+    
+    <div id="project">
+        <img src="../static/img/donealo.svg">
+    </div>
+
+
+    
+    <div id="tech">
+      <ul><p id="expTitles">Technologies Used</p>
+        <li style="background-color:#d1f3ff; border:3px solid #1DBAF0;">React.js</li>
+        <li style="background-color:#d1f3ff;  border:3px solid #1DBAF0;">Javascript</li>
+        <li style="background-color:#d1f3ff;  border:3px solid #1DBAF0;">HTML</li>
+        <li style="background-color:#d1f3ff;  border:3px solid #1DBAF0;">CSS</li>
+        <li style="background-color:#d1f3ff;  border:3px solid #1DBAF0;">Meteor</li>
+        <li style="background-color:#d1f3ff;  border:3px solid #1DBAF0;">MongoDB</li>
+      </ul>
+    </div>
+
+    <div id="tech" class="extras">
+      <ul><p id="expTitles">Extra Resources</p>
+        <li style="border:3px solid #1DBAF0;"><a style="color:#1DBAF0;" href="https://donealo.herokuapp.com/">Website</a></li>
+    </div>
+  </div>
+
 </div>  
 
-<!-- 
-  <svg width="100%" height="550"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
-
-    <defs>
-      <pattern patternUnits="userSpaceOnUse" id="space" x="0" y="0" width="888" height="483">
-        <image xlink:href="../static/img/space_background.png" x="0" y="0" width="888" height="483" />
-      </pattern>
-    </defs>
-
-      <rect x="0" y="0" width="100%" height="88%" stroke="black" stroke-width="2" fill="url(#space)" />
-    <image id="spaceship" xlink:href="../static/img/spaceship.svg" x="10" y="10" width="199" height="178" />
-
-  </svg> -->
-
 </div>
+
+</body>
+
+
+<footer>
+<div class="cont">
+  <div class="contact">
+  <div>Contact: </div>
+    <div class="clearfix social">  
+      <a href=""> <img src="../static/img/linkedin.png"></a>
+      <div class="name"><a href="">LinkedIn</a></div>
+
+      <a href=""><img src="../static/img/githubLogo.png"></a>
+      <div class="name"><a href="">Github</a></div>
+      
+      <a href=""><img src="../static/img/twitter.png"></a>
+      <div class="name"><a href="">Twitter</a></div>
+
+      <a href=""><img src="../static/img/email.png"></a>
+      <div class="name"><a href="">gracemarierodriguez6@gmail.com</a></div>    
+    </div>
+  </div>
+</div>
+
+
+</footer>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-</body>
 </html>
