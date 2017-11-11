@@ -55,7 +55,7 @@ ul{
 	/*margin-bottom: 0px;*/
 	margin-left: 10px
 	margin-right:10px;
-	padding-right: 15px;
+	padding-right: 20px;
 }
 
 .test{
@@ -357,11 +357,11 @@ display: inline-block;
 footer {
 	text-align: center;
 	background-color: #efefef;
-	position:absolute;
+	/*position: absolute;*/
 	bottom:0;
 	left: 0;
 	width: 100%;
-	padding:0;
+	
 	/*height:100%;*/
 }
 

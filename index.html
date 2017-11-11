@@ -1,6 +1,5 @@
 <!doctype html>
-% include head.html %
-
+<!-- % include head.html % -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -393,7 +392,7 @@
 
     drawAll = function(){
       //Reset before clearing the canvas
-      ctx.canvas.width = window.innerWidth-40;
+      ctx.canvas.width = window.innerWidth-50;
       // ctx.canvas.height = window.innerHeight - (window.innerHeight * 0.29)
       ctx.setTransform(1,0,0,1,0,0);
       ctx.clearRect(0,0,canvas.width,canvas.height);
