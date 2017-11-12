@@ -144,7 +144,7 @@
     
     //Activate new nav item 
     //Example taken from http://jsfiddle.net/rn3nc/1/
-    makeActive = function () {
+    makeActive = function (event) {
       links = $(event.target).attr('href');
       //console.log("Push link: ",links)
       window.history.pushState('','',links)
