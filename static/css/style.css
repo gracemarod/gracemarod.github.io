@@ -71,6 +71,13 @@ display: inline-block;
 
 /* ----------------- Info boxes --------------------*/
 /*Home*/
+
+#textBox2,
+#textBox3,
+#textBox4{
+	display:none;
+}
+
 #textBox1{
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
